@@ -5,3 +5,5 @@ D:\develop\C# Projects\TelegrammBot\obj\Debug\TelegrammBot.csproj.AssemblyRefere
 D:\develop\C# Projects\TelegrammBot\obj\Debug\TelegrammBot.csproj.CoreCompileInputs.cache
 D:\develop\C# Projects\TelegrammBot\obj\Debug\TelegrammBot.exe
 D:\develop\C# Projects\TelegrammBot\obj\Debug\TelegrammBot.pdb
+D:\develop\C# Projects\TelegrammBot\bin\Debug\MySql.Data.dll
+D:\develop\C# Projects\TelegrammBot\obj\Debug\TelegrammBot.csproj.CopyComplete

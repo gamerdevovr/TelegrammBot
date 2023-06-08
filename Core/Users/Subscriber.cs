@@ -1,39 +1,23 @@
-﻿using System;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿using System.Linq;
 
-namespace TelegrammBot.Core.Subscriber
+namespace TelegrammBot.Core.Users
 {
-    class Subscriber
+    public class Subscriber
     {
-        public uint Id { get; private set; }
-        public uint Code { get; private set; }
+        public int Id { get; private set; }
+        public int Code { get; private set; }
         public string Name { get; private set; }
         public string Address { get; private set; }
         public string[] Phone { get; private set; }
         public decimal Saldo { get; private set; }
-        public decimal Tariff { get; private set; }
-        public decimal TariffAmount { get; private set; }
+        public string Tariff { get; private set; }
+        public decimal TariffMount { get; private set; }
         public bool Active { get; private set; }
-        public string Comment { get; private set; }
+        public string Coment { get; private set; }
 
 
-        public Subscriber(uint id, uint code, string name, string address, string[] phone, decimal saldo, decimal tarrif, decimal tariffAmount, bool active, string comment)
+        public Subscriber(int id, int code, string name, string address, string[] phone, decimal saldo, string tarrif, decimal tariffMount, bool active, string coment)
         {
-            if (code.ToString().Length != 8)
-            {
-                throw new ArgumentException("Code must be an 8-digit number.");
-            }
-
-            for (int i = 0; i < phone.Length; i++)
-            {
-                string formattedPhone = $"{phone[i]}".Replace("-", "").Replace(" ", "");
-                if (!IsValidPhoneNumber(formattedPhone))
-                {
-                    throw new ArgumentException("Invalid phone number format.");
-                }
-            }
-
             Id = id;
             Code = code;
             Name = name;
@@ -41,9 +25,9 @@ namespace TelegrammBot.Core.Subscriber
             Phone = phone;
             Saldo = saldo;
             Tariff = tarrif;
-            TariffAmount = tariffAmount;
+            TariffMount = tariffMount;
             Active = active;
-            Comment = comment;
+            Coment = coment;
         }
 
         public override string ToString()
@@ -51,7 +35,7 @@ namespace TelegrammBot.Core.Subscriber
             string phonesString = string.Join(",", Phone);
 
             string returnStringOfAllProperties = $"ID: {Id}, Code: {Code}, Name: {Name}, Address: {Address}, Phones: {phonesString}, Saldo: {Saldo}, " +
-                   $"TariffAmount: {TariffAmount}, Active: {Active}, Comment: {Comment}";
+                   $"TariffMount: {TariffMount}, Active: {Active}, Comment: {Coment}";
 
             return returnStringOfAllProperties;
         }
@@ -67,9 +51,9 @@ namespace TelegrammBot.Core.Subscriber
                         Phone.SequenceEqual(subscriber.Phone) &&
                         Saldo == subscriber.Saldo &&
                         Tariff == subscriber.Tariff &&
-                        TariffAmount == subscriber.TariffAmount &&
+                        TariffMount == subscriber.TariffMount &&
                         Active == subscriber.Active &&
-                        Comment == subscriber.Comment;
+                        Coment == subscriber.Coment;
             }
             else
             {
@@ -89,20 +73,12 @@ namespace TelegrammBot.Core.Subscriber
                 hash += (Phone != null ? Phone.GetHashCode() : 0);
                 hash += Saldo.GetHashCode();
                 hash += Tariff.GetHashCode();
-                hash += TariffAmount.GetHashCode();
+                hash += TariffMount.GetHashCode();
                 hash += Active.GetHashCode();
-                hash += (Comment != null ? Comment.GetHashCode() : 0);
+                hash += (Coment != null ? Coment.GetHashCode() : 0);
                 
                 return hash;
             }
-        }
-
-        private bool IsValidPhoneNumber(string phoneNumber)
-        {
-            string pattern = @"^\+38\d{10}$";
-            bool IsValidate = Regex.IsMatch(phoneNumber, pattern);
-            
-            return IsValidate;
         }
     }
 }

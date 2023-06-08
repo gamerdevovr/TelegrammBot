@@ -1,0 +1,4 @@
+﻿Server: 10.77.90.53
+Username: test
+Password: test1234
+Database: test
