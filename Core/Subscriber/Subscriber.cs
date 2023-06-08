@@ -50,7 +50,7 @@ namespace TelegrammBot.Core.Subscriber
         {
             string phonesString = string.Join(",", Phone);
 
-            string returnStringOfAllProperties = $"ID: {Id}, Code: {Code}, Name: {Name}, Address: {Address}, Phones: {phonesString}, Saldo: {Saldo}," +
+            string returnStringOfAllProperties = $"ID: {Id}, Code: {Code}, Name: {Name}, Address: {Address}, Phones: {phonesString}, Saldo: {Saldo}, " +
                    $"TariffAmount: {TariffAmount}, Active: {Active}, Comment: {Comment}";
 
             return returnStringOfAllProperties;
