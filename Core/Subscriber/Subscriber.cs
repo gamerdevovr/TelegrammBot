@@ -81,17 +81,18 @@ namespace TelegrammBot.Core.Subscriber
         {
             unchecked
             {
-                int hash = 17;
-                hash = hash * 23 + Id.GetHashCode();
-                hash = hash * 23 + Code.GetHashCode();
-                hash = hash * 23 + (Name != null ? Name.GetHashCode() : 0);
-                hash = hash * 23 + (Address != null ? Address.GetHashCode() : 0);
-                hash = hash * 23 + (Phone != null ? Phone.GetHashCode() : 0);
-                hash = hash * 23 + Saldo.GetHashCode();
-                hash = hash * 23 + Tariff.GetHashCode();
-                hash = hash * 23 + TariffAmount.GetHashCode();
-                hash = hash * 23 + Active.GetHashCode();
-                hash = hash * 23 + (Comment != null ? Comment.GetHashCode() : 0);
+                int hash = 0;
+                hash += Id.GetHashCode();
+                hash += Code.GetHashCode();
+                hash += (Name != null ? Name.GetHashCode() : 0);
+                hash += (Address != null ? Address.GetHashCode() : 0);
+                hash += (Phone != null ? Phone.GetHashCode() : 0);
+                hash += Saldo.GetHashCode();
+                hash += Tariff.GetHashCode();
+                hash += TariffAmount.GetHashCode();
+                hash += Active.GetHashCode();
+                hash += (Comment != null ? Comment.GetHashCode() : 0);
+                
                 return hash;
             }
         }
