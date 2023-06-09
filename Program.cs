@@ -13,6 +13,9 @@ namespace TelegrammBot
             ConnectMySQL connectMySQL = new ConnectMySQL();
             List<Subscriber> myList = connectMySQL.GetTableSubscriber();
 
+            Console.WriteLine(connectMySQL.TimeConnect);
+            Console.WriteLine(connectMySQL.TimeGetBase);
+
             foreach (Subscriber subscriber in myList)
             {
                 Console.WriteLine(subscriber.ToString());

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using MySql.Data.MySqlClient;
 using TelegrammBot.Core.Users;
@@ -8,6 +9,9 @@ namespace TelegrammBot.Core.DataProviders.MySQL
 {
     public class ConnectMySQL
     {
+        public TimeSpan TimeConnect { get; private set; }
+        public TimeSpan TimeGetBase { get; private set; }
+
         private readonly string _server;
         private readonly string _username;
         private readonly string _password;
@@ -26,14 +30,24 @@ namespace TelegrammBot.Core.DataProviders.MySQL
 
         public List<Subscriber> GetTableSubscriber()
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
             ConnectMySQL connector = new ConnectMySQL();
             using (MySqlConnection connection = connector.GetConnection())
             {
                 connection.Open();
 
+                stopwatch.Stop();
+                TimeConnect = stopwatch.Elapsed;
+                stopwatch.Start();
+                
                 string query = "SELECT * FROM users";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
+
+                stopwatch.Stop();
+                TimeGetBase = stopwatch.Elapsed;
 
                 List<Subscriber> subscribers = new List<Subscriber>();
 
@@ -57,6 +71,7 @@ namespace TelegrammBot.Core.DataProviders.MySQL
                 }
 
                 reader.Close();
+                connection.Close();
 
                 return subscribers;
             }
