@@ -7,3 +7,17 @@ D:\develop\C# Projects\TelegrammBot\obj\Debug\TelegrammBot.exe
 D:\develop\C# Projects\TelegrammBot\obj\Debug\TelegrammBot.pdb
 D:\develop\C# Projects\TelegrammBot\bin\Debug\MySql.Data.dll
 D:\develop\C# Projects\TelegrammBot\obj\Debug\TelegrammBot.csproj.CopyComplete
+C:\Users\mekis\source\repos\TelegrammBot\bin\Debug\TelegrammBot.exe.config
+C:\Users\mekis\source\repos\TelegrammBot\bin\Debug\TelegrammBot.exe
+C:\Users\mekis\source\repos\TelegrammBot\bin\Debug\TelegrammBot.pdb
+C:\Users\mekis\source\repos\TelegrammBot\bin\Debug\MySql.Data.dll
+C:\Users\mekis\source\repos\TelegrammBot\bin\Debug\System.Memory.dll
+C:\Users\mekis\source\repos\TelegrammBot\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\mekis\source\repos\TelegrammBot\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\mekis\source\repos\TelegrammBot\bin\Debug\System.Buffers.dll
+C:\Users\mekis\source\repos\TelegrammBot\obj\Debug\TelegrammBot.csproj.AssemblyReference.cache
+C:\Users\mekis\source\repos\TelegrammBot\obj\Debug\TelegrammBot.csproj.SuggestedBindingRedirects.cache
+C:\Users\mekis\source\repos\TelegrammBot\obj\Debug\TelegrammBot.csproj.CoreCompileInputs.cache
+C:\Users\mekis\source\repos\TelegrammBot\obj\Debug\TelegrammBot.csproj.CopyComplete
+C:\Users\mekis\source\repos\TelegrammBot\obj\Debug\TelegrammBot.exe
+C:\Users\mekis\source\repos\TelegrammBot\obj\Debug\TelegrammBot.pdb

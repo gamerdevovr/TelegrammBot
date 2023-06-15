@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.IO;
 using MySql.Data.MySqlClient;
 using TelegrammBot.Core.Users;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TelegrammBot.Core.DataProviders.MySQL
 {
@@ -33,8 +35,8 @@ namespace TelegrammBot.Core.DataProviders.MySQL
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            ConnectMySQL connector = new ConnectMySQL();
-            using (MySqlConnection connection = connector.GetConnection())
+            //ConnectMySQL connector = new ConnectMySQL();
+            using (MySqlConnection connection = GetConnection())
             {
                 connection.Open();
 
@@ -58,8 +60,8 @@ namespace TelegrammBot.Core.DataProviders.MySQL
                     string name = reader["name"].ToString();
                     string address = reader["address"].ToString();
                     // TODO: Зробити розбивку телефона з рядка на массив рядків
-                    //string phone = reader["phone"].ToString();
-                    string[] phone = new string[] { "+380671111111", "+380671111111" };
+                    string phoneFromBd = reader["phone"].ToString();
+                    string phone = SelectPhones(phoneFromBd);
                     decimal saldo = Convert.ToDecimal((float)reader["saldo"]);
                     string tariff = reader["tariff"].ToString();
                     decimal tariffAmount = Convert.ToDecimal((float)reader["tariffmount"]);
@@ -87,6 +89,58 @@ namespace TelegrammBot.Core.DataProviders.MySQL
         {
             string connectionString = $"Server={_server};Database={_database};Uid={_username};Pwd={_password};";
             return new MySqlConnection(connectionString);
+
+        }
+
+        private string SelectPhones(string phoneFromBd)
+        {
+            if (phoneFromBd != "")
+            {
+               
+                if (int.TryParse(Convert.ToString(phoneFromBd[0]), out int i)) // перевіряє чи перший символ рядка є числом
+                {
+                    return ToClearNumber(phoneFromBd);
+                }
+                else if (phoneFromBd[0] == '+')
+                {
+                    return ToClearNumber(phoneFromBd);
+                }
+                else
+                {
+                    return "Відсутній";
+                }
+
+            }
+            else {return "Відсутній"; }
+            
+        }
+
+        private string ToClearNumber(string phone)
+        {
+            for (int i = 0; i < phone.Length; i++) // цикл видаляє всі не числа з рядка окрім ' ', '.', ';', ','
+            {
+                if (int.TryParse(Convert.ToString(phone[i]), out int x) != true)
+                {
+                    if (phone[i] != ' ' && phone[i] != ',' && phone[i] != ';' && phone[i] != '.')
+                    {
+                        phone = phone.Remove(i, 1);
+                        i--;
+                    }
+                }
+
+            }
+            phone = phone.Replace(" ", "s"); //заміна симовлів що залишилися на 'S', а потім на усі 'S' на '; '
+            phone = phone.Replace(",", "s");
+            phone = phone.Replace(";", "s");
+            phone = phone.Replace(".", "s");
+
+            phone = phone.Replace("ssss", "s");
+            phone = phone.Replace("sss", "s");
+            phone = phone.Replace("ss", "s");
+            phone = phone.Replace("s", "; ");
+
+
+            return phone; 
         }
     }
 }

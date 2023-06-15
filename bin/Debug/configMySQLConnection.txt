@@ -1,4 +1,4 @@
-﻿Server: 10.77.90.53
-Username: test
-Password: test1234
+﻿Server: 127.0.0.1
+Username: root
+Password: 1111
 Database: test

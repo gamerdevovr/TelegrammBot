@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using TelegrammBot.Core.DataProviders.MySQL;
 using TelegrammBot.Core.Users;
 
@@ -10,6 +11,8 @@ namespace TelegrammBot
     {
         static void Main(string[] args)
         {
+            Console.OutputEncoding = UTF8Encoding.UTF8; //украънська мова для консолі
+
             ConnectMySQL connectMySQL = new ConnectMySQL();
             List<Subscriber> myList = connectMySQL.GetTableSubscriber();
 
@@ -22,6 +25,8 @@ namespace TelegrammBot
             }
 
             Console.ReadKey();
+
+            
         }
     }
 }

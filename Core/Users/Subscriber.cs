@@ -8,7 +8,7 @@ namespace TelegrammBot.Core.Users
         public int Code { get; private set; }
         public string Name { get; private set; }
         public string Address { get; private set; }
-        public string[] Phone { get; private set; }
+        public string Phone { get; private set; }
         public decimal Saldo { get; private set; }
         public string Tariff { get; private set; }
         public decimal TariffMount { get; private set; }
@@ -16,7 +16,7 @@ namespace TelegrammBot.Core.Users
         public string Coment { get; private set; }
 
 
-        public Subscriber(int id, int code, string name, string address, string[] phone, decimal saldo, string tarrif, decimal tariffMount, bool active, string coment)
+        public Subscriber(int id, int code, string name, string address, string phone, decimal saldo, string tarrif, decimal tariffMount, bool active, string coment)
         {
             Id = id;
             Code = code;
