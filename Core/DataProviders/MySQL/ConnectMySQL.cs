@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.IO;
+using System.Text.RegularExpressions;
 using MySql.Data.MySqlClient;
 using TelegrammBot.Core.Users;
 using static System.Net.Mime.MediaTypeNames;
@@ -96,8 +97,9 @@ namespace TelegrammBot.Core.DataProviders.MySQL
         {
             if (phoneFromBd != "")
             {
-               
-                if (int.TryParse(Convert.ToString(phoneFromBd[0]), out int i)) // перевіряє чи перший символ рядка є числом
+                bool isInt = int.TryParse(Convert.ToString(phoneFromBd[0]), out _);
+
+                if (isInt)
                 {
                     return ToClearNumber(phoneFromBd);
                 }
@@ -117,30 +119,16 @@ namespace TelegrammBot.Core.DataProviders.MySQL
 
         private string ToClearNumber(string phone)
         {
-            for (int i = 0; i < phone.Length; i++) // цикл видаляє всі не числа з рядка окрім ' ', '.', ';', ','
-            {
-                if (int.TryParse(Convert.ToString(phone[i]), out int x) != true)
-                {
-                    if (phone[i] != ' ' && phone[i] != ',' && phone[i] != ';' && phone[i] != '.')
-                    {
-                        phone = phone.Remove(i, 1);
-                        i--;
-                    }
-                }
 
-            }
-            phone = phone.Replace(" ", "s"); //заміна симовлів що залишилися на 'S', а потім на усі 'S' на '; '
-            phone = phone.Replace(",", "s");
-            phone = phone.Replace(";", "s");
-            phone = phone.Replace(".", "s");
+            phone = Regex.Replace(phone, @"[^0-9.,;\s]", "");
 
-            phone = phone.Replace("ssss", "s");
-            phone = phone.Replace("sss", "s");
-            phone = phone.Replace("ss", "s");
-            phone = phone.Replace("s", "; ");
+            phone = Regex.Replace(phone, @"[^0-9]", "s");
 
+            phone = phone = Regex.Replace(phone, @"(.)\1+", "$1");
 
-            return phone; 
+            phone = Regex.Replace(phone, @"[^0-9]", "; ");
+
+            return phone;
         }
     }
 }

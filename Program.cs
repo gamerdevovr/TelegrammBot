@@ -26,7 +26,6 @@ namespace TelegrammBot
 
             Console.ReadKey();
 
-            
         }
     }
 }
